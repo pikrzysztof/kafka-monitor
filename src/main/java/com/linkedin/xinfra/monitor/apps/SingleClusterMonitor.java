@@ -266,7 +266,7 @@ public class SingleClusterMonitor implements App {
     parser.addArgument("--topic-rebalance-interval-ms")
       .action(net.sourceforge.argparse4j.impl.Arguments.store())
       .required(false)
-      .type(Integer.class)
+      .type(Long.class)
       .metavar("REBALANCE_MS")
       .dest("rebalanceMs")
       .help(MultiClusterTopicManagementServiceConfig.REBALANCE_INTERVAL_MS_DOC);
@@ -316,8 +316,8 @@ public class SingleClusterMonitor implements App {
       props.put(TopicManagementServiceConfig.TOPIC_CREATION_ENABLED_CONFIG, res.getBoolean("autoTopicCreationEnabled"));
     if (res.getInt("replicationFactor") != null)
       props.put(TopicManagementServiceConfig.TOPIC_REPLICATION_FACTOR_CONFIG, res.getInt("replicationFactor"));
-    if (res.getInt("rebalanceMs") != null)
-      props.put(MultiClusterTopicManagementServiceConfig.REBALANCE_INTERVAL_MS_CONFIG, res.getInt("rebalanceMs"));
+    if (res.getLong("rebalanceMs") != null)
+      props.put(MultiClusterTopicManagementServiceConfig.REBALANCE_INTERVAL_MS_CONFIG, res.getLong("rebalanceMs"));
     SingleClusterMonitor app = new SingleClusterMonitor(props, "single-cluster-monitor");
     app.start();
 

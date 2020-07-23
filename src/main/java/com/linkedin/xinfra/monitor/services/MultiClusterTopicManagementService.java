@@ -79,7 +79,7 @@ public class MultiClusterTopicManagementService implements Service {
   private final AtomicBoolean _isRunning = new AtomicBoolean(false);
   private final String _serviceName;
   private final Map<String, TopicManagementHelper> _topicManagementByCluster;
-  private final int _scheduleIntervalMs;
+  private final long _scheduleIntervalMs;
   private final long _preferredLeaderElectionIntervalMs;
   private final ScheduledExecutorService _executor;
 
@@ -92,7 +92,7 @@ public class MultiClusterTopicManagementService implements Service {
     Map<String, Map> propsByCluster = props.containsKey(MultiClusterTopicManagementServiceConfig.PROPS_PER_CLUSTER_CONFIG)
         ? (Map) props.get(MultiClusterTopicManagementServiceConfig.PROPS_PER_CLUSTER_CONFIG) : new HashMap<>();
     _topicManagementByCluster = initializeTopicManagementHelper(propsByCluster, topic);
-    _scheduleIntervalMs = config.getInt(MultiClusterTopicManagementServiceConfig.REBALANCE_INTERVAL_MS_CONFIG);
+    _scheduleIntervalMs = config.getLong(MultiClusterTopicManagementServiceConfig.REBALANCE_INTERVAL_MS_CONFIG);
     _preferredLeaderElectionIntervalMs = config.getLong(MultiClusterTopicManagementServiceConfig.PREFERRED_LEADER_ELECTION_CHECK_INTERVAL_MS_CONFIG);
     _executor = Executors.newSingleThreadScheduledExecutor(
       r -> new Thread(r, _serviceName + "-multi-cluster-topic-management-service"));

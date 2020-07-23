@@ -41,7 +41,7 @@ public class MultiClusterTopicManagementServiceConfig extends AbstractConfig {
               ConfigDef.Importance.HIGH,
               TOPIC_DOC)
       .define(REBALANCE_INTERVAL_MS_CONFIG,
-              ConfigDef.Type.INT,
+              ConfigDef.Type.LONG,
               1000 * 60 * 10,
               atLeast(10),
               ConfigDef.Importance.LOW,
